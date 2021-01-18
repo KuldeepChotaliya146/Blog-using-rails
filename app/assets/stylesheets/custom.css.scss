@@ -1,0 +1,9 @@
+@import 'bootstrap/dist/css/bootstrap';
+
+.jumbotron {
+    background-image: asset-url('coding.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 500px;
+}
