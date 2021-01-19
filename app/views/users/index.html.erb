@@ -9,7 +9,7 @@
   </div>
   <div class="card-body">
     <p class="card-text"><%= pluralize(user.articles.count, "article") %></p>
-    <% if logged_in && user == current_user %>
+    <% if logged_in? && user == current_user %>
     <%= link_to 'Edit Profile', edit_user_path(user.id), class:"btn btn-outline-warning" %>
     <% end %>
   </div>
