@@ -45,7 +45,7 @@ class ArticlesController < ApplicationController
     private
 
     def require_same_user
-        if current_user != @article.user
+        if current_user != @article.user && !current_user.admin?
             redirect_to @article
         end
     end
