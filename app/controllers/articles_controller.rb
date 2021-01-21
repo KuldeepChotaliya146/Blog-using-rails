@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
     before_action :required_user, except: [:show, :index]
-    before_action :require_same_user, only: [:edit, :update, :destroy]
+    before_action :require_same_user, only: [  :destroy]
     def show
         @article = Article.find(params[:id])
     end
@@ -18,7 +18,7 @@ class ArticlesController < ApplicationController
     end
     
     def create
-        @article = Article.new(params.require(:article).permit(:title, :description))
+        @article = Article.new(params.require(:article).permit(:title, :description, category_ids:[]))
         @article.user = current_user
         if @article.save
             redirect_to @article
@@ -29,7 +29,7 @@ class ArticlesController < ApplicationController
 
     def update
         @article = Article.find(params[:id])
-       if @article.update(params.require(:article).permit(:title, :description))
+       if @article.update(params.require(:article).permit(:title, :description, category_ids:[]))
         redirect_to @article
        else
         render 'edit'
@@ -45,7 +45,7 @@ class ArticlesController < ApplicationController
     private
 
     def require_same_user
-        if current_user != @article.user && !current_user.admin?
+        if current_user != @article.user 
             redirect_to @article
         end
     end
